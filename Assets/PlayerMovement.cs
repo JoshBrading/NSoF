@@ -75,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log(transform.position);
+        }
+
 
     }
     public void TakeDamage(int damage)

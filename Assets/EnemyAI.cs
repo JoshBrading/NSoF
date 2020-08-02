@@ -7,8 +7,7 @@ public class EnemyAI : MonoBehaviour
 
     public Transform Player;
     public CharacterController controller;
-    public float health = 50f;
-
+    public float health;
     int MoveSpeed = 5;
     int MaxDist = 10;
     int MinDist = 5;
