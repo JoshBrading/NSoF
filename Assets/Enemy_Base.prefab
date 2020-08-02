@@ -137,7 +137,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.0001
   m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &799207434323842726
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   timeBetweenShooting: 1
   spread: 0
-  range: 3
+  range: 4
   reloadTime: 0
   timeBetweenShots: 0
   allowButtonHold: 0
