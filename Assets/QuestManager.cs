@@ -22,8 +22,10 @@ public class QuestManager : MonoBehaviour
     void Start()
     {
         Debug.Log("=== QUEST MANAGER START ===");
-        
-       InvokeRepeating("Spawn", 3f, 3f);
+        for(int i = 0; i < 5; i++)
+        {
+            Spawn();
+        }
     }
 
     // Update is called once per frame
