@@ -14,11 +14,16 @@ public class QuestManager : MonoBehaviour
     // 3 = Order of Souls
     bool active = false;
     public TextMeshProUGUI text;
+    public GameObject enemy;
+    public Transform Player;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("=== QUEST MANAGER START ===");
         
+       InvokeRepeating("Spawn", 3f, 3f);
     }
 
     // Update is called once per frame
@@ -58,6 +63,16 @@ public class QuestManager : MonoBehaviour
     }
     private void Quest_OS()
     {
+
+    }
+
+    void Spawn()
+    {
+        Debug.Log("=== SPAWN CALLED ===");
+        Vector3 position = new Vector3(Random.Range(-10.0F, 10.0F), 0, Random.Range(-10.0F, 10.0F));
+        position = Player.position + position;
+        GameObject spawned_enemy = Instantiate(enemy, position, Quaternion.identity);
+        spawned_enemy.GetComponent<EnemyAI>().Player = Player;
 
     }
 }

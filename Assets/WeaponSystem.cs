@@ -4,6 +4,7 @@ using TMPro;
 public class WeaponSystem : MonoBehaviour
 {
     public Camera cam;
+    public GameObject EnemyShootingPoint;
     public RaycastHit hit;
     public LayerMask enemy;
     public TextMeshProUGUI text;
@@ -55,7 +56,10 @@ public class WeaponSystem : MonoBehaviour
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
-            Shoot();
+            if (!isEnemy)
+                Shoot();
+            else
+                EnemyShoot();
         }
     }
     private void Shoot()
@@ -79,9 +83,40 @@ public class WeaponSystem : MonoBehaviour
                 hit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
                 Debug.Log("Hit");
             }
-            else if(hit.transform.tag == "Player")
+        }
+        else
+        {
+            Debug.Log("Missed");
+        }
+
+        bulletsLeft--;
+        bulletsShot--;
+
+        Invoke("ResetShot", timeBetweenShooting);
+
+        if (bulletsShot > 0 && bulletsLeft > 0)
+            Invoke("Shoot", timeBetweenShots);
+    }
+    private void EnemyShoot()
+    {
+        readyToShoot = false;
+
+        //Spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate Direction with Spread
+        Vector3 direction = EnemyShootingPoint.transform.forward + new Vector3(x, y, 0);
+
+        //RayCast
+        if (Physics.Raycast(EnemyShootingPoint.transform.position, direction, out hit, range, enemy))
+        {
+            Debug.Log(hit.collider.name);
+
+            if (hit.transform.tag == "Player")
             {
                 hit.collider.GetComponent<PlayerMovement>().TakeDamage(damage);
+                Debug.Log("Hit");
             }
         }
         else
