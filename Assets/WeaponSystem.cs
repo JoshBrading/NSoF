@@ -8,7 +8,7 @@ public class WeaponSystem : MonoBehaviour
     public RaycastHit hit;
     public LayerMask enemy;
     public TextMeshProUGUI text;
-    // public GameObject muzzleFlash;
+
 
     public int damage, magSize, bulletsPerTap;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
@@ -64,6 +64,10 @@ public class WeaponSystem : MonoBehaviour
     }
     private void Shoot()
     {
+        Animator anim = gameObject.GetComponent<Animator>();
+
+        anim.SetTrigger("Shoot");
+        
         readyToShoot = false;
 
         //Spread
@@ -138,6 +142,9 @@ public class WeaponSystem : MonoBehaviour
     }
     private void Reload()
     {
+        Animator anim = gameObject.GetComponent<Animator>();
+
+        anim.SetTrigger("Reload");
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }

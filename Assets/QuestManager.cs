@@ -19,6 +19,9 @@ public class QuestManager : MonoBehaviour
     public GameObject enemy;
     public Transform Player;
 
+    
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +73,7 @@ public class QuestManager : MonoBehaviour
         Vector3 position = position_array[index];
         Spawn(enemy, position, 5, 100);
     }
+
     private void Quest_MA()
     {
 
@@ -79,7 +83,7 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    // I should make a command c# file and put a bunch of commands in there but maybe later?
+    // I should make a command file and put a bunch of commands in there but maybe later?
     public void Spawn(GameObject entity, Vector3 pos, int count, float health)
     {               // Spawns "count" of "entity" with "health" at "pos" + offset
         Vector3 position = pos;

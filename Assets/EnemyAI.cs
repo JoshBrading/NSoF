@@ -8,9 +8,8 @@ public class EnemyAI : MonoBehaviour
     public Transform Player;
     public CharacterController controller;
     public float health;
-    int MoveSpeed = 5;
-    int MaxDist = 10;
-    int MinDist = 5;
+    public int MoveSpeed;
+    int MinDist = 40;
     float gravity = -18f;
     Vector3 velocity;
 
@@ -25,14 +24,10 @@ public class EnemyAI : MonoBehaviour
         Vector3 position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
         transform.LookAt(position);
 
-        if (Vector3.Distance(transform.position, Player.position) >= MinDist)
+        if (Vector3.Distance(transform.position, Player.position) <= MinDist)
         {
+            Debug.Log(Vector3.Distance(transform.position, Player.position));
             controller.Move(transform.forward * MoveSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
-            {
-                //Here Call any function U want Like Shoot at here or something
-            }
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
