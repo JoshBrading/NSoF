@@ -16,7 +16,7 @@ public class QuestManager : MonoBehaviour
     // 3 = Order of Souls
     bool active = false;
     public TextMeshProUGUI text;
-    public GameObject enemy, enemy_boss;
+    public GameObject enemy, enemy_boss, crate, chest;
     public Transform Player;
 
     // Start is called before the first frame update
@@ -53,6 +53,12 @@ public class QuestManager : MonoBehaviour
 
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            questType = 0;
+            active = false;
+        }
     }
 
     private void Quest_GH()
@@ -67,10 +73,15 @@ public class QuestManager : MonoBehaviour
         Debug.Log("Position: " + index);
         Vector3 position = position_array[index];
         Spawn(enemy, position, 5, 100);
+        Instantiate(chest, position, Quaternion.identity);
+
     }
 
     private void Quest_MA()
     {
+        Instantiate(crate, transform.position, Quaternion.identity);
+        Instantiate(crate, transform.position, Quaternion.identity);
+        Instantiate(crate, transform.position, Quaternion.identity);
 
     }
     private void Quest_OS()

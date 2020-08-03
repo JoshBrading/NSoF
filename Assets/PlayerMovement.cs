@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -91,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isHolding = true;
                     hit.transform.parent = transform;
-                    hit.transform.position = transform.position + transform.forward + new Vector3 { x = 0, y = 1, z = 0 };
+                    hit.transform.position = transform.position + transform.forward + new Vector3 { x = 0, y = 0.75f, z = 0 };
                     holding = hit.transform;
                 }
             }
@@ -127,14 +129,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (holding != null && holding.tag == "Merchant_Item")
                     {
-                        dialog.SetText("Sell crate for 1250 Gold");
-                        if (Input.GetKeyDown(KeyCode.F))
-                        {
-                            goldCount += 1250;
-                            Destroy(holding.gameObject);
-                            holding = null;
-                            isHolding = false;
-                        }
+                        dialog.SetText("Deliver to Name on Island");
                     }
                     else if (isHolding)
                     {
@@ -153,6 +148,29 @@ public class PlayerMovement : MonoBehaviour
                             // 3 = Order of Souls
                             goldCount += -1000;
                         }
+                    }
+
+                }
+                else if (hit.transform.tag == "SellMerchant")
+                {
+                    if (holding != null && holding.tag == "Merchant_Item")
+                    {
+                        dialog.SetText("Sell crate for 1250 Gold");
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            goldCount += 1250;
+                            Destroy(holding.gameObject);
+                            holding = null;
+                            isHolding = false;
+                        }
+                    }
+                    else if (isHolding)
+                    {
+                        dialog.SetText("This item cannot be sold to Merchant Alliance");
+                    }
+                    else
+                    {
+                        dialog.SetText("Pick up a quest to sell crates to me from the outpost!");
                     }
 
                 }
@@ -218,6 +236,17 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 dialog.SetText("");
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            dialog.SetText("Are you sure you want to quit? (Left click)");
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Application.Quit();
+                //SceneManager.LoadScene("Start");
+
             }
         }
 
