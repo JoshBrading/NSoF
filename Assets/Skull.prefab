@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8088158065999607079}
   m_Layer: 0
   m_Name: Skull
-  m_TagString: Order
+  m_TagString: Order_Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 564edbaa654e984439553d2bf206306e, type: 2}
+  - {fileID: 2100000, guid: 674f4381c9de51143860110d632cc8ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

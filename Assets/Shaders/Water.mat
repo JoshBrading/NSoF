@@ -33,7 +33,7 @@ Material:
     - _Displacement: 0.01
     - _NormalStrength: 0.03
     - _Smoothness: 0.89
-    - _Strength: 0.53
+    - _Strength: 1.35
     m_Colors:
     - _DeepColor: {r: 0.043137252, g: 0.04630308, b: 0.2, a: 0.30588236}
     - _ShallowColor: {r: 0, g: 0.28697148, b: 0.41509432, a: 0}

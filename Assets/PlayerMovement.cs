@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform boat;
+    public GameObject gun, sword;
     public bool onBoat = false;
     public Camera cam;
     public TextMeshProUGUI text, dialog, gold;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded, isHolding = false;
     Transform holding;
+    public bool godmode;
   
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        text.SetText("Health: " + health);
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            gun.SetActive(true);
+            sword.SetActive(false);
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            gun.SetActive(false);
+            sword.SetActive(true);
+        }
+
+            text.SetText("Health: " + health);
         gold.SetText("Gold: " + goldCount);
 
 
@@ -78,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     isHolding = true;
                     hit.transform.parent = transform;
-                    hit.transform.position += new Vector3 { x = 0, y = 2, z = 0 };
+                    hit.transform.position = transform.position + transform.forward + new Vector3 { x = 0, y = 1, z = 0 };
                     holding = hit.transform;
                 }
             }
@@ -211,6 +224,10 @@ public class PlayerMovement : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        if (godmode)
+        {
+            return;
+        }
         health -= damage;
         Debug.Log("Taken" + damage);
         if (health <= 0f)

@@ -10,6 +10,9 @@ TagManager:
   - Merchant
   - Gold
   - Order
+  - Gold_Item
+  - Order_Item
+  - Merchant_Item
   layers:
   - Default
   - TransparentFX
