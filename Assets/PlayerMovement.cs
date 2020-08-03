@@ -9,11 +9,12 @@ public class PlayerMovement : MonoBehaviour
     public Transform boat;
     public bool onBoat = false;
     public Camera cam;
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI text, dialog, gold;
     public float speed = 12f, groundDistance = 0.4f, jumpHeight = 3f, health;
     public Transform groundCheck;
     public LayerMask groundMask;
     public static bool lockMovement;
+    public int goldCount;
     float gravity = -18f;
     Vector3 velocity;
     bool isGrounded, isHolding = false;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         text.SetText("Health: " + health);
+        gold.SetText("Gold: " + goldCount);
 
 
         if (lockMovement)
@@ -101,6 +103,110 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(transform.position);
         }
 
+        if (true) // Yes I know this is extremely stupid lmao
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 5))
+            {
+                if (hit.transform.tag == "Merchant")
+                {
+                    if (holding != null && holding.tag == "Merchant_Item")
+                    {
+                        dialog.SetText("Sell crate for 1250 Gold");
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            goldCount += 1250;
+                            Destroy(holding.gameObject);
+                            holding = null;
+                            isHolding = false;
+                        }
+                    }
+                    else if (isHolding)
+                    {
+                        dialog.SetText("This item cannot be sold to Merchant Alliance");
+                    }
+                    else
+                    {
+                        dialog.SetText("Press F to claim Merchant Alliance quest || 1000 Gold");
+                        if (Input.GetKeyDown(KeyCode.F) && GetComponent<QuestManager>().questType == 0)
+                        {
+                            GetComponent<QuestManager>().questType = 2;
+                            // Quest Types
+                            // 0 = None
+                            // 1 = Gold Hoarders
+                            // 2 = Merchant Alliance
+                            // 3 = Order of Souls
+                            goldCount += -1000;
+                        }
+                    }
+
+                }
+                else if (hit.transform.tag == "Gold")
+                {
+                    if (holding != null && holding.tag == "Gold_Item")
+                    {
+                        dialog.SetText("Sell chest for 1250 Gold");
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            goldCount += 1250;
+                            Destroy(holding.gameObject);
+                            holding = null;
+                            isHolding = false;
+                        }
+                    }
+                    else if (isHolding)
+                    {
+                        dialog.SetText("This item cannot be sold to Gold Hoarders");
+                    }
+                    else
+                    {
+                        dialog.SetText("Press F to claim Gold Hoarders quest || 1000 Gold");
+                        if (Input.GetKeyDown(KeyCode.F) && GetComponent<QuestManager>().questType == 0)
+                        {
+                            GetComponent<QuestManager>().questType = 1;
+                            goldCount += -1000;
+                        }
+                    }
+                }
+                else if (hit.transform.tag == "Order")
+                {
+                    if (holding != null && holding.tag == "Order_Item")
+                    {
+                        dialog.SetText("Sell skull for 1250 Gold");
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            goldCount += 1250;
+                            Destroy(holding.gameObject);
+                            holding = null;
+                            isHolding = false;
+                        }
+                    }
+                    else if (isHolding)
+                    {
+                        dialog.SetText("This item cannot be sold to Order of Souls");
+                    }
+                    else
+                    {
+                        dialog.SetText("Press F to claim Order of Souls quest || 1000 Gold");
+                        if (Input.GetKeyDown(KeyCode.F) && GetComponent<QuestManager>().questType == 0)
+                        {
+                            GetComponent<QuestManager>().questType = 3;
+                            goldCount += -1000;
+                        }
+                    }
+                }
+                else
+                {
+                    dialog.SetText("");
+                }
+            }
+            else
+            {
+                dialog.SetText("");
+            }
+        }
 
     }
     public void TakeDamage(int damage)

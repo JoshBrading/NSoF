@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 
 public class QuestManager : MonoBehaviour
 {
-    int questType = 3;
+    public int questType;
     // Quest Types
     // 0 = None
     // 1 = Gold Hoarders
@@ -19,15 +19,10 @@ public class QuestManager : MonoBehaviour
     public GameObject enemy, enemy_boss;
     public Transform Player;
 
-    
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("=== QUEST MANAGER START ===");
-       // Spawn(enemy, Player, 3, 1);
+
     }
 
     // Update is called once per frame
@@ -38,7 +33,7 @@ public class QuestManager : MonoBehaviour
             switch (questType)
             {
                 case 0:
-                    text.SetText("No quest active");
+                    text.SetText("");
                     break;
                 case 1:
                     text.SetText("Quest: Gold Hoarders");

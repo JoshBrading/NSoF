@@ -7,6 +7,9 @@ TagManager:
   - Quest_Giver
   - Wheel
   - Enemy
+  - Merchant
+  - Gold
+  - Order
   layers:
   - Default
   - TransparentFX

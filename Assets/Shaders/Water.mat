@@ -35,5 +35,5 @@ Material:
     - _Smoothness: 0.89
     - _Strength: 0.53
     m_Colors:
-    - _DeepColor: {r: 0.04392132, g: 0.1981132, b: 0.15458204, a: 0.30588236}
-    - _ShallowColor: {r: 0, g: 0.7075472, b: 0.52468145, a: 0}
+    - _DeepColor: {r: 0.043137252, g: 0.04630308, b: 0.2, a: 0.30588236}
+    - _ShallowColor: {r: 0, g: 0.28697148, b: 0.41509432, a: 0}
