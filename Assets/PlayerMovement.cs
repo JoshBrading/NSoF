@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public static bool lockMovement;
     float gravity = -18f;
     Vector3 velocity;
-    bool isGrounded;
+    bool isGrounded, isHolding = false;
     Transform holding;
   
     // Start is called before the first frame update
@@ -64,16 +64,17 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && !isHolding)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, 100))
+            if(Physics.Raycast(ray, out hit, 4))
             {
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if(interactable != null)
                 {
+                    isHolding = true;
                     hit.transform.parent = transform;
                     hit.transform.position += new Vector3 { x = 0, y = 2, z = 0 };
                     holding = hit.transform;
@@ -82,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if(holding != null && Input.GetKeyDown(KeyCode.X))
         {
+            isHolding = false;
             holding.position = transform.position - new Vector3 { x = 0, y = 2, z = 0 };
             if (onBoat)
             {
