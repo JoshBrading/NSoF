@@ -123,10 +123,10 @@ public class WeaponSystem : MonoBehaviour
                 Debug.Log("Hit");
             }
         }
-        else
-        {
-            Debug.Log("Missed");
-        }
+    //    else
+    //    {
+    //        Debug.Log("Missed");
+    //    }
 
         bulletsLeft--;
         bulletsShot--;

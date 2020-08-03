@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoatChild : MonoBehaviour
 {
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,11 @@ public class BoatChild : MonoBehaviour
     void  OnTriggerEnter(Collider other)
     {
         other.transform.parent = transform;
+        player.GetComponent<PlayerMovement>().onBoat = true;
     }
     void OnTriggerExit(Collider other)
     {
         other.transform.parent = null;
+        player.GetComponent<PlayerMovement>().onBoat = false;
     }
 }

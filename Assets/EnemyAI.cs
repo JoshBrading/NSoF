@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EnemyAI : MonoBehaviour
 {
-
+    public bool isBoss;
+    public GameObject skull;
     public Transform Player;
     public CharacterController controller;
     public float health;
@@ -45,6 +46,8 @@ public class EnemyAI : MonoBehaviour
     }
     public void Die()
     {
+        if(isBoss)
+            Instantiate(skull, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }

@@ -6,6 +6,8 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public Transform boat;
+    public bool onBoat = false;
     public Camera cam;
     public TextMeshProUGUI text;
     public float speed = 12f, groundDistance = 0.4f, jumpHeight = 3f, health;
@@ -15,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     float gravity = -18f;
     Vector3 velocity;
     bool isGrounded;
+    Transform holding;
   
     // Start is called before the first frame update
     void Start()
@@ -71,9 +74,25 @@ public class PlayerMovement : MonoBehaviour
                 Interactable interactable = hit.collider.GetComponent<Interactable>();
                 if(interactable != null)
                 {
-                    speed = 100;
+                    hit.transform.parent = transform;
+                    hit.transform.position += new Vector3 { x = 0, y = 2, z = 0 };
+                    holding = hit.transform;
                 }
             }
+        }
+        if(holding != null && Input.GetKeyDown(KeyCode.X))
+        {
+            holding.position = transform.position - new Vector3 { x = 0, y = 2, z = 0 };
+            if (onBoat)
+            {
+                holding.parent = boat;
+            }
+            else
+            {
+                holding.parent = null;
+            }
+            
+                holding = null;
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {

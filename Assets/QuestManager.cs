@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 
 public class QuestManager : MonoBehaviour
 {
-    int questType = 1;
+    int questType = 3;
     // Quest Types
     // 0 = None
     // 1 = Gold Hoarders
@@ -16,7 +16,7 @@ public class QuestManager : MonoBehaviour
     // 3 = Order of Souls
     bool active = false;
     public TextMeshProUGUI text;
-    public GameObject enemy;
+    public GameObject enemy, enemy_boss;
     public Transform Player;
 
     
@@ -80,7 +80,17 @@ public class QuestManager : MonoBehaviour
     }
     private void Quest_OS()
     {
-
+        int index;
+        Vector3[] position_array = { // Possible locations for gold hoarder chest to spawn
+            new Vector3 { x = -562, y = 110, z = 1267 },
+            new Vector3 { x = -320 , y = 88, z = 1066 },
+            new Vector3 { x = -437, y = 97, z = 1197 }
+        };
+        index = Random.Range(0, position_array.Length);
+        Debug.Log("Position: " + index);
+        Vector3 position = position_array[index];
+        Spawn(enemy, position, 9, 100);
+        Spawn(enemy_boss, position, 3, 200);
     }
 
     // I should make a command file and put a bunch of commands in there but maybe later?
