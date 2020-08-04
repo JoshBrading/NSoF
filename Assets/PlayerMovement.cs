@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public int goldCount;
     float gravity = -18f;
     Vector3 velocity;
-    bool isGrounded, isHolding = false;
+    bool isGrounded, isHolding = false; // FIXME: We dont actually need a bool on isHolding since holding can be checked for null
     Transform holding;
     public bool godmode;
   
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // This feels wrong but it obviously works
         {
             gun.SetActive(true);
             sword.SetActive(false);
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             sword.SetActive(true);
         }
 
-            text.SetText("Health: " + health);
+        text.SetText("Health: " + health);
         gold.SetText("Gold: " + goldCount);
 
 
@@ -120,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (true) // Yes I know this is extremely stupid lmao
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);    // Rename this ray to something else so we dont have to use if (true) to make it local
+            RaycastHit hit;                                         // this too
 
             if (Physics.Raycast(ray, out hit, 5))
             {
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
                         dialog.SetText("Sell crate for 1250 Gold");
                         if (Input.GetKeyDown(KeyCode.F))
                         {
-                            goldCount += 1250;
+                            goldCount += 1250;              // FIXME: Make this offset by a random integer so it varies
                             Destroy(holding.gameObject);
                             holding = null;
                             isHolding = false;
@@ -248,6 +248,14 @@ public class PlayerMovement : MonoBehaviour
                 //SceneManager.LoadScene("Start");
 
             }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed += 8f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed += 8f;
         }
 
     }

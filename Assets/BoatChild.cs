@@ -17,8 +17,8 @@ public class BoatChild : MonoBehaviour
         
     }
 
-    void  OnTriggerEnter(Collider other)
-    {
+    void  OnTriggerEnter(Collider other)    // Do triggers only work on character controllers? They dont detect other objects being placed on the boat? 
+    {                                       //Will enemies be made children to the boat? Probably but their character controller doesnt allow them to "stick" but this is still not good probably?
         other.transform.parent = transform;
         player.GetComponent<PlayerMovement>().onBoat = true;
     }

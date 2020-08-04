@@ -13,7 +13,7 @@ public class TrackPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // This script seems useless, this could probably be combined with another file
     {
         Vector3 position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
         transform.LookAt(position);

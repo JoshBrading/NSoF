@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
 
+// This file is pretty unorganized, PlayerMovement.cs also has a lot of questing stuff that should be moved here
 public class QuestManager : MonoBehaviour
 {
     public int questType;
@@ -54,8 +55,8 @@ public class QuestManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
+        if (Input.GetKeyDown(KeyCode.P))    // Ok so yea, basically we never check if the quest is over so this way the player can force quit the quest
+        {                                   // I would like to remove this and setup a system that checks if the player has completed the quest but that sounds like a couple hours of coding :)
             questType = 0;
             active = false;
         }
@@ -64,7 +65,9 @@ public class QuestManager : MonoBehaviour
     private void Quest_GH()
     {
         int index;
-        Vector3[] position_array = { // Possible locations for gold hoarder chest to spawn
+        // Possible locations for gold hoarder chest to spawn... this should be relayed to an in game map at some point... 
+        // also setup zones and then pick a random location in those zones to make this less predicatable... how to make these zones? google.com
+        Vector3[] position_array = { 
             new Vector3 { x = -562, y = 110, z = 1267 }, 
             new Vector3 { x = -320 , y = 88, z = 1066 }, 
             new Vector3 { x = -437, y = 97, z = 1197 } 
@@ -72,13 +75,14 @@ public class QuestManager : MonoBehaviour
         index = Random.Range(0, position_array.Length);
         Debug.Log("Position: " + index);
         Vector3 position = position_array[index];
-        Spawn(enemy, position, 5, 100);
+        Spawn(enemy, position, 5, 100); // This is lame, instantiate the chest under the ground and make the player dig it up, once the player "hits" the chest then spawn enemies
         Instantiate(chest, position, Quaternion.identity);
 
     }
 
     private void Quest_MA()
     {
+        // FIXME: These shouldnt spawn on top of each other, add an offset so the player doesnt get confused on why there is 3 in 1
         Instantiate(crate, transform.position, Quaternion.identity);
         Instantiate(crate, transform.position, Quaternion.identity);
         Instantiate(crate, transform.position, Quaternion.identity);
@@ -100,7 +104,8 @@ public class QuestManager : MonoBehaviour
     }
 
     // I should make a command file and put a bunch of commands in there but maybe later?
-    public void Spawn(GameObject entity, Vector3 pos, int count, float health)
+    // FIXME: Move to seperate cmd file
+    public void Spawn(GameObject entity, Vector3 pos, int count, float health) 
     {               // Spawns "count" of "entity" with "health" at "pos" + offset
         Vector3 position = pos;
         Debug.Log("=== SPAWN CALLED ===");

@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-
+        // At some point I should check how far into the water the entity moves to prevent it from going under...
         Vector3 position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
         transform.LookAt(position);
 
@@ -47,7 +47,7 @@ public class EnemyAI : MonoBehaviour
     public void Die()
     {
         if(isBoss)
-            Instantiate(skull, transform.position, Quaternion.identity);
+            Instantiate(skull, transform.position, Quaternion.identity); // If the enemy is a boss then drop skulls for order of souls... Make other skulls and randomize the drops soon™
         Destroy(this.gameObject);
     }
 }

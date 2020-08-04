@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class WeaponSystem : MonoBehaviour
+public class WeaponSystem : MonoBehaviour // A lot of this was borrowed from a youtube tutorial, if I can find the link I'll source it here: ____
 {
     public Camera cam;
     public GameObject EnemyShootingPoint;
@@ -9,7 +9,7 @@ public class WeaponSystem : MonoBehaviour
     public LayerMask enemy;
     public TextMeshProUGUI text;
 
-
+    // A lot of these variables arent useful for this game but oh well
     public int damage, magSize, bulletsPerTap;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public bool allowButtonHold, isEnemy;
@@ -18,7 +18,7 @@ public class WeaponSystem : MonoBehaviour
     bool shooting, readyToShoot, reloading;
 
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected() // This is cool, I didnt know this was a thing
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, range);
@@ -101,8 +101,8 @@ public class WeaponSystem : MonoBehaviour
         if (bulletsShot > 0 && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
     }
-    private void EnemyShoot()
-    {
+    private void EnemyShoot()   // Using a seperate function for enemy hits just cause I didnt like so many if statements to check if it was the player shooting or an enemy
+    {                           // Also melees should not be rays they should be collision detections... fix that later?
         readyToShoot = false;
 
         //Spread
