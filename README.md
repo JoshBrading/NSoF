@@ -1,6 +1,6 @@
 # Not Sea of Friends (NSoF)
 ## About
-NSoF is a Sea of Thieves fan game made in Unity. 
+NSoF is a Sea of Thieves fan game made in Unity. Originally starting as a class project, NSoF is now a personal project I work on occasionally.
 ## Controls
 It is not labelled in game, but to use the boat, stand infont of the wheel and use F
 | Key  | Command |
